@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# VSCode/IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Pytest cache
+.pytest_cache/
+
+# Allure and HTML Reports
+allure-results/
+allure-report/
+reports/
+report.html
+
+# Logs
+*.log
+logs/
+
+# Jupyter notebooks
+*.ipynb
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Test result caches
+.cache/
+dist/
+build/
+*.egg-info/
+
+# Python environment files
+Pipfile.lock
+poetry.lock
+
+# Playwright output
+playwright-report/
+test-results/

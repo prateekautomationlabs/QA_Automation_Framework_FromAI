@@ -1,0 +1,20 @@
+# Web Automation
+playwright
+
+# Test Runner
+pytest
+pytest-html
+
+# API Testing
+requests
+
+# Config Management
+pyyaml
+
+# Database (MySQL)
+mysql-connector-python
+
+# Logging & Utilities
+rich
+
+pytest-xdist
