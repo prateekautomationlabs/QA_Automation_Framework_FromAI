@@ -7,7 +7,7 @@ on:
 
 jobs:
   run-tests:
-    runs-on: ubuntu-22.04  # More stable than ubuntu-latest for now
+    runs-on: ubuntu-22.04
 
     strategy:
       matrix:
@@ -45,6 +45,7 @@ jobs:
           pytest -m web --tb=short --disable-warnings --html=reports/web_report.html --self-contained-html
 
       - name: Upload Test Reports
+        if: always()  # ✅ Run this step no matter what
         uses: actions/upload-artifact@v4
         with:
           name: pytest-html-reports
