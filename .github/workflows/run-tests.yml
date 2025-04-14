@@ -1,4 +1,4 @@
-name: Run Web & API Tests on PR Merge will trigger tests on CI
+name: Run Web & API Tests on PR Merge
 
 on:
   pull_request:
@@ -7,11 +7,11 @@ on:
 
 jobs:
   run-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # More stable than ubuntu-latest for now
 
     strategy:
       matrix:
-        python-version: [3.10]
+        python-version: [3.11]
 
     steps:
       - name: Checkout code
@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: |
@@ -34,12 +34,18 @@ jobs:
           source .venv/bin/activate
           playwright install --with-deps
 
-      - name: Run API Tests
+      - name: Run API Tests and Generate Report
         run: |
           source .venv/bin/activate
-          pytest -m api --tb=short --disable-warnings
+          pytest -m api --tb=short --disable-warnings --html=reports/api_report.html --self-contained-html
 
-      - name: Run Web Tests (Headless)
+      - name: Run Web Tests and Generate Report
         run: |
           source .venv/bin/activate
-          pytest -m web --tb=short --disable-warnings
+          pytest -m web --tb=short --disable-warnings --html=reports/web_report.html --self-contained-html
+
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-html-reports
+          path: reports/
